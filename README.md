@@ -9,6 +9,10 @@
 5. Run flask webserver `python -m bay_area_relief` 
 
 
+# Inital Continuous Integration
+1. Run unit tests `pytest`
+
+
 
 ### Repo resources 
 * [Flask tutorial](https://flask.palletsprojects.com/en/1.1.x/tutorial/layout/)
