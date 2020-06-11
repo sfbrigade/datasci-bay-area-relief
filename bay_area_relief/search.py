@@ -7,4 +7,3 @@ search_bp = Blueprint('search', __name__, url_prefix='/search')
 def search() -> Response:
     data = {"hello": "world"}
     return make_response(jsonify(data), 200)
-

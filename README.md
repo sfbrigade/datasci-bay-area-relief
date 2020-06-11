@@ -1,7 +1,7 @@
 # bay-area-relief 
 
 
-# Install 
+### Install 
 1. Install virtualenv `pip3 install virtualenv`
 2. Create virtualenv in repo `python -m venv env`
 3. Start virtualenv `source env/bin/activate`
@@ -9,8 +9,9 @@
 5. Run flask webserver `python -m bay_area_relief` 
 
 
-# Inital Continuous Integration
+### Initial Continuous Integration
 1. Run unit tests `pytest`
+2. Run python lint `flake8`
 
 
 
