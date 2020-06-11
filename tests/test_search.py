@@ -1,14 +1,17 @@
 from unittest import TestCase
-import search
-import json
+from bay_area_relief.search import search_bp
+from flask import Flask
+
+app = Flask(__name__)
+app.register_blueprint(search_bp)
 
 
-class TestPortalSearch(TestCase):
+class TestSearchApi(TestCase):
+
+    def setUp(self):
+        self.app = app.test_client()
 
     def test_search(self):
-        response = search.app.test_client().post("/search")
-        data = json.loads(response.get_data(as_text=True))
-        self.assertEquals(data["hello"], "world")
-
-
-
+        response = self.app.post("/search")
+        self.assertEqual(response.json["hello"], "world")
+        self.assertEqual(response.status_code, 200)
