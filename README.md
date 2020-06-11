@@ -18,3 +18,4 @@
 ### Repo resources 
 * [Flask tutorial](https://flask.palletsprojects.com/en/1.1.x/tutorial/layout/)
 * [Using form attribute for flask request](https://stackoverflow.com/questions/10434599/get-the-data-received-in-a-flask-request)
+* [How to handle form data with flask ](https://stackoverflow.com/questions/45590988/converting-flask-form-data-to-json-only-gets-first-value)

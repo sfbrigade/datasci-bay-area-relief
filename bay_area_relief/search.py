@@ -17,9 +17,23 @@ class MimeTypes(Enum):
         return is_form or is_json
 
 
+class CountyResponse(str, Enum):
+    YES = "yes"
+    NO = "no"
+    UNKNOWN = "unknown"
+
+
 @search_bp.route('', methods=["POST"])
 def search() -> Response:
     if not MimeTypes.is_supported(request.content_type):
         return make_response(jsonify({}), 400)
-    data = request.form or request.json
-    return make_response(jsonify(data), 200)
+
+    response = {}
+
+    data = request.form.to_dict(flat=False) or request.json
+
+    counties = data.get("counties") or []
+    for county in counties:
+        response[county] = CountyResponse.YES.value
+
+    return make_response(jsonify(response), 200)
