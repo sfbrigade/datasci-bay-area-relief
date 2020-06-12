@@ -35,13 +35,15 @@ class TestSearchApi(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_search_county(self):
-        data = {"counties": ["Alameda", "Contra Costa", "Marin", "Napa",
-                             "San Francisco", "San Mateo", "Santa Clara",
-                             "Solano", "Sonoma"]
-                }
+        data = {
+            "supported_counties": [
+                "Alameda",
+                "San Mateo"
+            ]
+        }
         response = self.app.post("/search", data=data)
-        self.assertEqual(response.json,
-                         {'Alameda': 'yes', 'Contra Costa': 'yes', 'Marin': 'yes',
-                          'Napa': 'yes', 'San Francisco': 'yes', 'San Mateo': 'yes',
-                          'Santa Clara': 'yes', 'Solano': 'yes', 'Sonoma': 'yes'})
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual({'is_supported_all_counties': False, 'San_Francisco_county': 0,
+                          'Alameda_county': 1, 'San_Mateo_county': 1,
+                          'Contra_Costa_county': 0, 'Santa_Clara_county': 0},
+                         response.json)
+        self.assertEqual(200, response.status_code)
