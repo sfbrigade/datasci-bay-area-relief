@@ -2,3 +2,4 @@
 *.env
 start-venv.sh
 __pycache__/
+env/
