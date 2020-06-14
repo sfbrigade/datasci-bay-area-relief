@@ -10,8 +10,8 @@
 
 
 ### Initial Continuous Integration
-1. Run unit tests `pytest`
-2. Run python lint `flake8`
+1. Install docker engine
+2. Run unitest `make unittest`
 
 
 ### Repo resources 
