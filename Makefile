@@ -8,6 +8,10 @@ start-env:
 	source env/bin/activate
 stop-env:
 	deactivate
+database-start:
+	docker-compose up -d
+database-stop:
+	docker-compose down
 webserver:
 	pip3 install -r requirements.txt
 	python -m bay_area_relief

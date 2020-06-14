@@ -1,10 +1,14 @@
 # bay-area-relief 
 
 
-### u 
+### Running Project
 1. Install [python3](https://www.python.org/downloads/)
 2. Install virtualenv `make start-env`
 3. Run backend webserver `make webserver`
+
+#### Running Database
+1. Start postgresQL `make database-start`
+2. Stop postgresQL `make database-stop`
 
 
 ### Initial Continuous Integration
