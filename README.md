@@ -8,6 +8,7 @@
 
 #### Running Database
 1. Start postgresQL `make database-start`
+    * Login `psql -d <database_name> -U <postgres username>`
 2. Stop postgresQL `make database-stop`
 
 

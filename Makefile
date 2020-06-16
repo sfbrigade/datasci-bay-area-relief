@@ -10,6 +10,7 @@ stop-env:
 	deactivate
 database-start:
 	docker-compose up -d
+	docker exec -it $$(docker ps -aqf "name=postgres") /bin/bash
 database-stop:
 	docker-compose down
 webserver:
