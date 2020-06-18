@@ -1,5 +1,4 @@
 .idea
-*.env
-start-venv.sh
+.env
 __pycache__/
 env/
