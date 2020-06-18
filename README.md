@@ -18,7 +18,6 @@
     * Using the [postgreSQL client](https://eggerapps.at/postico/) is easier and prefer
         * Credentials for your local postgres, should be in database.env
 2. Stop postgres db `make database-stop`
-3. To remove postgres db `make database-remove`
 
 #### Running Migrations on your DB 
 1. Migrate and create tables `make upgrade-db`

@@ -20,7 +20,7 @@ setuptools.setup(
         "flask",
         "Flask-Migrate",
         "Flask-SQLAlchemy",
-        "psycopg2-binary"
+        "psycopg2"
     ],
     # For installing test dependencies directly
     extras_require={'test': tests_require},

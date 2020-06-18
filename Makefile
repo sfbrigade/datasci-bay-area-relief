@@ -8,10 +8,6 @@ database-start:
 	docker exec -it $$(docker ps -aqf "name=postgres") /bin/bash
 database-stop:
 	docker-compose down
-database-remove:
-	docker-compose down
-	docker kill $(docker ps -aqf "name=postgres")
-	docker volume rm $(docker volume ls |  grep bayarea-relief-volume)
 webserver:
 	pip3 install --compile .
 	webserver
