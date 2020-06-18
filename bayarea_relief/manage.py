@@ -13,7 +13,10 @@ class Migration:
         # TODO:  Create Environment variable
         url = "postgresql://postgres:postgres@localhost:5432/bar"
         self.app.config['SQLALCHEMY_DATABASE_URI'] = url
-        self.app.config.from_object(os.environ['APP_SETTINGS'])
+
+        # TODO: Create app settings class
+        # app_settings = os.environ.['APP_SETTINGS']
+        # self.app.config.from_object(os.environ['APP_SETTINGS'])
         self.db = SQLAlchemy(app)
         self.migrate = Migrate(app, self.db)
         self.manager = manager
@@ -22,7 +25,7 @@ class Migration:
         self.manager.run()
 
 
-if __name__ == '__main__':
+def main():
     app = create_app()
     manager = Manager(app)
     manager.add_command('db', MigrateCommand)
