@@ -1,16 +1,21 @@
-class UniqueCountyEnum(enum.Enum):
+from enum import Enum
+
+from bayarea_relief import db
+
+
+class UniqueCountyEnum(Enum):
     yes = 'Yes'
     no = 'No'
     unknown = 'Unknown'
 
 
-class CountyEnum(enum.Enum):
+class CountyEnum(Enum):
     all = 'All'
     some = 'Some'
     unknown = 'Unknown'
 
 
-class CategoryEnum(enum.Enum):
+class CategoryEnum(Enum):
     agriculture = 'Agriculture'
     all = 'All'
     unknown = 'Unknown'

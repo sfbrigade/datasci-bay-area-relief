@@ -1,24 +1,17 @@
-import os
 from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
-
-from flask_sqlalchemy import SQLAlchemy
-
-from bayarea_relief import create_app
+from bayarea_relief import app, db
+from bayarea_relief import models
 
 
 class Migration:
-    def __init__(self, app, manager):
+    def __init__(self, app, manager, db):
         self.app = app
-        # TODO:  Create Environment variable
-        url = "postgresql://postgres:postgres@localhost:5432/bar"
-        self.app.config['SQLALCHEMY_DATABASE_URI'] = url
-
+        self.db = db
         # TODO: Create app settings class
         # app_settings = os.environ.['APP_SETTINGS']
         # self.app.config.from_object(os.environ['APP_SETTINGS'])
-        self.db = SQLAlchemy(app)
-        self.migrate = Migrate(app, self.db)
+        self.migrate = Migrate(self.app, self.db)
         self.manager = manager
 
     def run(self):
@@ -26,8 +19,7 @@ class Migration:
 
 
 def main():
-    app = create_app()
     manager = Manager(app)
     manager.add_command('db', MigrateCommand)
-    migration = Migration(app, manager)
+    migration = Migration(app, manager, db)
     migration.run()

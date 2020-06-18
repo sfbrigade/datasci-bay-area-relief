@@ -4,7 +4,7 @@ services:
     image: postgres # use latest official postgres version
     container_name: postgres
     ports:
-      - "5432:5432"
+      - 5000:5432
     env_file:
       - database.env # configure postgres
     volumes:

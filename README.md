@@ -3,20 +3,32 @@
 
 ### Running Project
 1. Install [python3](https://www.python.org/downloads/)
-2. Install virtualenv `make start-env`
+2. Install a virtualenv
+    ```
+    pip3 install virtualenv
+    python3 -m venv env
+    source env/bin/activate
+    ```
+    * To stop virtualenv then run this command `deactivate`
 3. Run backend webserver `make webserver`
-4. pip install --compile .
 
 #### Running Database
-1. Start postgresQL `make database-start`
+1. Start postgres db `make database-start`
     * Login `psql -d <database_name> -U <postgres username>` e.g. ` psql -d bar -U postgres
-`
-2. Stop postgresQL `make database-stop`
+    * Using the [postgreSQL client](https://eggerapps.at/postico/) is easier and prefer
+        * Credentials for your local postgres, should be in database.env
+2. Stop postgres db `make database-stop`
+3. To remove postgres db `make database-remove`
 
+#### Running Migrations on your DB 
+1. Migrate and create tables `make upgrade-db`
+2. If changes were made to model then follow these changes
+    * Migrate first `make migrate-db`
+    * Verify model changes in migrations/versions
+    * Upgrade db `make upgrade-db`
 
 
 ### Initial Continuous Integration
-1. Install [docker engine](https://docs.docker.com/engine/install/)
 2. Run unittests `make unittest`
 
 
