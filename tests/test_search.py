@@ -1,5 +1,5 @@
 from unittest import TestCase
-from bay_area_relief.search import search_bp
+from bayarea_relief.search import search_bp
 from flask import Flask
 
 app = Flask(__name__)

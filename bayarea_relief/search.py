@@ -3,7 +3,7 @@ from enum import Enum
 from flask import jsonify, make_response
 from flask import Response, Blueprint, request
 
-from bay_area_relief.constants import BAYAREA_COUNTIES
+from bayarea_relief.constants import BAYAREA_COUNTIES
 
 search_bp = Blueprint('search', __name__, url_prefix='/search')
 

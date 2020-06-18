@@ -1,17 +1,3 @@
-import enum
-
-from flask import Flask
-from bay_area_relief.search import search_bp
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
-
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:postgres@localhost:5432/bar"
-
-db = SQLAlchemy(app)
-migrate = Migrate(app, db)
-
-
 class UniqueCountyEnum(enum.Enum):
     yes = 'Yes'
     no = 'No'
@@ -55,7 +41,8 @@ class ReliefModel(db.Model):
     county = db.Column(db.Enum(CountyEnum))
     category = db.Column(db.Enum(CategoryEnum))
 
-    def __init__(self, name, sf_county, alameda_county, san_mateo_county, contra_costa_county, santa_clara_county,
+    def __init__(self, name, sf_county, alameda_county, san_mateo_county,
+                 contra_costa_county, santa_clara_county,
                  county, category):
         self.name = name
         self.sf_county = sf_county
@@ -68,13 +55,3 @@ class ReliefModel(db.Model):
 
     def __repr__(self):
         return "f<Relief {self.name}>"
-
-
-def create_app():
-    app.register_blueprint(search_bp)
-    return app
-
-
-if __name__ == "__main__":
-    app = create_app()
-    app.run(host="0.0.0.0", port=8080)

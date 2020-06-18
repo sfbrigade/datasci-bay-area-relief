@@ -5,11 +5,14 @@
 1. Install [python3](https://www.python.org/downloads/)
 2. Install virtualenv `make start-env`
 3. Run backend webserver `make webserver`
+4. pip install --compile .
 
 #### Running Database
 1. Start postgresQL `make database-start`
-    * Login `psql -d <database_name> -U <postgres username>`
+    * Login `psql -d <database_name> -U <postgres username>` e.g. ` psql -d bar -U postgres
+`
 2. Stop postgresQL `make database-stop`
+
 
 
 ### Initial Continuous Integration
