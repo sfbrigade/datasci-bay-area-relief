@@ -1,7 +1,7 @@
 # this is the target
 unittest:
 	pip3 install --compile [test].
-	flake8 .
+	flake8 . --max-line-length=88 --exclude migrations/
 	pytest
 database-start:
 	docker-compose up -d
