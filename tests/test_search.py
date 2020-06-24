@@ -9,41 +9,54 @@ app.register_blueprint(search_bp)
 class TestSearchApi(TestCase):
 
     def setUp(self):
+        self.data = {
+            "name": "Public sector help",
+            "category": "Multiple",
+            "counties": {
+                "sf_county": "Yes",
+                "alameda_county": "Yes",
+                "san_mateo_county": "Yes",
+                "contra_costa_county": "Yes",
+                "santa_clara_county": "Yes",
+            }
+        }
+        self.headers = {
+            "Content-type": "application/json"
+        }
         self.app = app.test_client()
 
     def test_search(self):
-        response = self.app.post("/search", data={"hello": "world"})
-        self.assertEqual(response.status_code, 200)
+        response = self.app.post("/search", json=self.data, headers=self.headers)
+        self.assertEqual(200, response.status_code)
 
     def test_search_with_invalid_content_type(self):
-        response = self.app.post("/search", data={"hello": "world"},
+        response = self.app.post("/search", json=self.data,
                                  headers={
                                      "Content-Type": "text/plain"
                                  })
-        self.assertEqual(response.status_code, 400)
+        self.assertEqual(400, response.status_code)
 
-        response = self.app.post("/search", json={"hello": "world"},
-                                 headers={
-                                     "Content-Type": "application/json"
-                                 })
-        self.assertEqual(response.status_code, 200)
+        response = self.app.post("/search", json=self.data,
+                                 headers=self.headers)
+        self.assertEqual(200, response.status_code)
 
-        response = self.app.post("/search", data={"hello": "world"},
+        response = self.app.post("/search", json=self.data,
                                  headers={
                                      "Content-Type": "application/x-www-form-urlencoded"
                                  })
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(400, response.status_code)
+
+        response = self.app.post("/search", json=self.data,
+                                 headers={
+                                     "Content-Type": "multipart/form-data"
+                                 })
+        self.assertEqual(400, response.status_code)
 
     def test_search_county(self):
-        data = {
-            "supported_counties": [
-                "Alameda",
-                "San Mateo"
-            ]
-        }
-        response = self.app.post("/search", data=data)
-        self.assertEqual({'is_supported_all_counties': False, 'San_Francisco_county': 0,
-                          'Alameda_county': 1, 'San_Mateo_county': 1,
-                          'Contra_Costa_county': 0, 'Santa_Clara_county': 0},
-                         response.json)
+        response = self.app.post("/search", json=self.data, headers=self.headers)
+        expected = {'alameda_county': 'Yes', 'category': 'Multiple',
+                    'contra_costa_county': 'Yes', 'county': 'Unknown',
+                    'name': 'Public sector help', 'san_mateo_county': 'Yes',
+                    'santa_clara_county': 'Yes', 'sf_county': 'Yes'}
+        self.assertEqual(expected, response.json)
         self.assertEqual(200, response.status_code)

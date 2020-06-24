@@ -8,6 +8,10 @@ class UniqueCountyEnum(Enum):
     no = 'No'
     unknown = 'Unknown'
 
+    @classmethod
+    def is_available(cls, county_response):
+        return UniqueCountyEnum.yes.value == county_response
+
 
 class CountyEnum(Enum):
     all = 'All'
