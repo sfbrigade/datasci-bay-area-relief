@@ -5,7 +5,7 @@ unittest:
 	pytest
 database-start:
 	docker-compose up -d
-	docker exec -it $$(docker ps -aqf "name=postgres") /bin/bash
+#	docker exec -it $$(docker ps -aqf "name=postgres") /bin/bash
 database-stop:
 	docker-compose down
 webserver:
@@ -16,7 +16,6 @@ migrate-db:
 	migrate db init
 	migrate db migrate
 upgrade-db:
-	make migrate-db
 	migrate db upgrade
 downgrade-db:
 	make migrate-db

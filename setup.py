@@ -17,6 +17,7 @@ setuptools.setup(
     test_suite='nose.collector',
     tests_require=tests_require,
     install_requires=[
+        "flask_script",
         "flask",
         "Flask-Migrate",
         "Flask-SQLAlchemy",
