@@ -5,6 +5,7 @@
 1. Install [python3](https://www.python.org/downloads/)
 2. Install a virtualenv
     ```
+    1. pip3 install -U setuptools
     1. pip3 install virtualenv
     2. python3 -m venv env
     3. source env/bin/activate
@@ -26,6 +27,11 @@
     * Migrate first `make migrate-db`
     * Verify model changes in migrations/versions
     * Upgrade db `make upgrade-db`
+    
+### Run webserver with Docker
+1. `docker build -t bay-area-relief .`
+2. `docker run bay-area-relief`
+3. `docker rmi bay-area-relief` (Optional)
 
 
 ### Initial Continuous Integration
