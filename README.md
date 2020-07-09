@@ -34,6 +34,10 @@
 3. `docker rmi bay-area-relief` (Optional)
 
 
+
+### Run webserver and database with Docker Compose
+1. `docker-compose up`
+
 ### Initial Continuous Integration
 2. Run unittests `make unittest`
 
