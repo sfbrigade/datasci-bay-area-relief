@@ -27,12 +27,21 @@
     * Migrate first `make migrate-db`
     * Verify model changes in migrations/versions
     * Upgrade db `make upgrade-db`
+
     
 ### Run webserver with Docker
 1. `docker build -t bay-area-relief .`
 2. `docker run bay-area-relief`
 3. `docker rmi bay-area-relief` (Optional)
 
+
+### Install Postgres Client 
+* https://eggerapps.at/postico/
+
+
+### Populate database
+* `pip install psycopg2-binary sqlalchemy pandas`
+* `python scripts/ingest_raw_data.py `
 
 
 ### Run webserver and database with Docker Compose
