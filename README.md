@@ -5,12 +5,13 @@
 1. Install [python3](https://www.python.org/downloads/)
 2. Install a virtualenv
     ```
-    pip3 install virtualenv
-    python3 -m venv env
-    source env/bin/activate
+    1. pip3 install virtualenv
+    2. python3 -m venv env
+    3. source env/bin/activate
+    4. pip3 install --compile .[test]
     ```
     * To stop virtualenv then run this command `deactivate`
-3. Run backend webserver `make webserver`
+3. Run backend webserver `webserver`
 
 #### Running Database
 1. Start postgres db `make database-start`

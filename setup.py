@@ -31,7 +31,6 @@ setuptools.setup(
         'console_scripts': [
             'webserver=bayarea_relief.__main__:main',
             'migrate=bayarea_relief.manage:main',
-
         ]
     },
 )
