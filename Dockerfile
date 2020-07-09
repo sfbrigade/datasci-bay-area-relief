@@ -4,4 +4,4 @@ COPY bayarea_relief bayarea_relief/
 COPY scripts scripts/
 COPY setup.py .
 RUN pip install --compile .
-CMD webserver
+ENTRYPOINT ["webserver"]

@@ -6,7 +6,7 @@
 2. Install a virtualenv
     ```
     1. pip3 install -U setuptools
-    1. pip3 install virtualenv
+    2. pip3 install virtualenv
     2. python3 -m venv env
     3. source env/bin/activate
     4. pip3 install --compile .[test]

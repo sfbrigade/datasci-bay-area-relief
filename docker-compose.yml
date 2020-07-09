@@ -9,6 +9,13 @@ services:
       - database.env # configure postgres
     volumes:
       - database-data:/var/lib/postgresql/data/ # persist data even if container shuts down
+  webserver:
+    build: .
+    container_name: webserver
+    ports:
+      - 8080:8080
+    depends_on:
+      - database
 volumes:
   database-data: # named volumes can be managed easier using docker-compose
     name: bayarea-relief-volume
