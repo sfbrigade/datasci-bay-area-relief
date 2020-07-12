@@ -7,7 +7,7 @@ database-start:
 #	docker exec -it $$(docker ps -aqf "name=postgres") /bin/bash
 database-stop:
 	docker-compose down
-migrate-db:
+init-migrate-db:
 	migrate db init
 	migrate db migrate
 upgrade-db:

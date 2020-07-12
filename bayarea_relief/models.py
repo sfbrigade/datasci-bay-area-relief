@@ -4,24 +4,33 @@ from bayarea_relief import db
 
 
 class BinaryWithUnknown(Enum):
-    yes = 'Yes'
-    no = 'No'
-    unknown = 'Unknown'
+    Yes = 'Yes'
+    No = 'No'
+    Unknown = 'Unknown'
 
     @classmethod
     def is_available(cls, response):
         return BinaryWithUnknown.yes.value == response
 
+    def __str__(self):
+        return self.value
+
 
 class Binary(Enum):
-    yes = 'Yes'
-    no = 'No'
+    Yes = 'Yes'
+    No = 'No'
+
+    def __str__(self):
+        return self.value
 
 
 class CountyEnum(Enum):
     all = 'All'
     some = 'Some'
     unknown = 'Unknown'
+
+    def __str__(self):
+        return self.value
 
 
 class CategoryEnum(Enum):
@@ -39,7 +48,10 @@ class CategoryEnum(Enum):
     real_estate = 'Real Estate'
     sport = 'Sport'
     transport = 'Transport'
-    financial = 'Financial Services'
+    financial_services = 'Financial Services'
+
+    def __str__(self):
+        return self.value
 
 
 class NonProfitEnum(Enum):
@@ -48,23 +60,35 @@ class NonProfitEnum(Enum):
     non_profits_only = "Non-Profits Only"
     businesses_only = "Businesses Only"
 
+    def __str__(self):
+        return self.value
+
 
 class ReliefTypeEnum(Enum):
     covid = 'COVID'
     protest_damage = 'Protest Damage'
     both = "Both"
 
+    def __str__(self):
+        return self.value
+
 
 class AwardTypeEnum(Enum):
     recurring = 'Recurring'
     one_time = 'Onetime'
 
+    def __str__(self):
+        return self.value
+
 
 class InterestRateApplicableEnum(Enum):
-    yes_reported = 'Yes Reported'
+    yes_and_reported = 'Yes and Reported'
     yes_but_not_reported = 'Yes but not Reported '
     no = 'No'
     unknown = "Unknown"
+
+    def __str__(self):
+        return self.value
 
 
 class SupportTypeEnum(Enum):
@@ -72,17 +96,36 @@ class SupportTypeEnum(Enum):
     loan = "Loan"
     grant = "Grant"
 
+    def __str__(self):
+        return self.value
+
 
 class SectorType(Enum):
     public = "Public"
     private = "Private"
 
+    def __str__(self):
+        return self.value
+
 
 class SupportedEntity(Enum):
     government = "Government"
     non_profit = "Non Profit"
-    go_fund_me = "GoFund Me"
+    gofund_me = "GoFund Me"
     private = "Private"
+
+    def __str__(self):
+        return self.value
+
+
+# class Serializer(object):
+#
+#     def serialize(self):
+#         return {c: getattr(self, c) for c in inspect(self).attrs.keys()}
+#
+#     @staticmethod
+#     def serialize_list(l):
+#         return [m.serialize() for m in l]
 
 
 class ReliefModel(db.Model):
@@ -116,7 +159,7 @@ class ReliefModel(db.Model):
     sector_type = db.Column(db.Enum(SectorType))
     supported_entity = db.Column(db.Enum(SupportedEntity))
     entity_name = db.Column(db.Text)
-    deadline_applicable = db.Column(db.Enum(Binary))
+    deadline_applicable = db.Column(db.Enum(BinaryWithUnknown))
     deadline = db.Column(db.DateTime)
     website_url = db.Column(db.Text)
     description = db.Column(db.Text)
@@ -126,7 +169,7 @@ class ReliefModel(db.Model):
     chinese = db.Column(db.Enum(BinaryWithUnknown))
     spanish = db.Column(db.Enum(BinaryWithUnknown))
 
-    def __init__(self, name, sf_county, alameda_county, san_mateo_county,
+    def __init__(self, _id, name, sf_county, alameda_county, san_mateo_county,
                  contra_costa_county, santa_clara_county,
                  county, category, black_owned,
                  lgbtq, women_owned, non_profit, _100_or_fewer, _500_or_fewer,
@@ -136,8 +179,9 @@ class ReliefModel(db.Model):
                  support_type, sector_type, supported_entity, entity_name,
                  deadline_applicable, deadline,
                  website_url, description,
-                 date_added, english_application,
-                 chinese_application, spanish_application):
+                 date_added, english,
+                 chinese, spanish, *args, **kwargs):
+        self.id = _id
         self.name = name
         self.sf_county = sf_county
         self.alameda_county = alameda_county
@@ -169,9 +213,20 @@ class ReliefModel(db.Model):
         self.website_url = website_url
         self.description = description
         self.date_added = date_added
-        self.english_application = english_application
-        self.chinese_application = chinese_application
-        self.spanish_application = spanish_application
+        self.english = english
+        self.chinese = chinese
+        self.spanish = spanish
 
-    def __repr__(self):
-        return "f<Relief {self.name}>"
+    def __getitem__(self, item):
+        return getattr(self, item)
+
+    @property
+    def serialize(self):
+        """Return object data in easily serializeable format"""
+        serialized_obj = {}
+        for column in self.__table__.columns:
+            value = self[column.key]
+            if isinstance(value, Enum):
+                value = str(value)
+            serialized_obj[column.key] = value
+        return serialized_obj

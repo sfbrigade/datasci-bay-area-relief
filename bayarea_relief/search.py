@@ -2,8 +2,10 @@ from enum import Enum
 
 from flask import jsonify, make_response
 from flask import Response, Blueprint, request
+from bayarea_relief.models import ReliefModel
+import json
 
-search_bp = Blueprint('search', __name__, url_prefix='/search')
+search_bp = Blueprint('search', __name__, url_prefix='/')
 
 
 class MimeTypes(Enum):
@@ -14,7 +16,7 @@ class MimeTypes(Enum):
         return cls.JSON.value == content_type.lower()
 
 
-@search_bp.route('', methods=["POST"])
+@search_bp.route('search/', methods=["POST"])
 def search() -> Response:
     if not MimeTypes.is_supported(request.content_type):
         return make_response(jsonify({}), 400)
@@ -39,5 +41,10 @@ def get_county_coverage(counties_supported):
         county_effectiveness = "All"
     else:
         county_effectiveness = "Some"
-
     return county_effectiveness
+
+
+@search_bp.route('/', methods=["GET"])
+def home() -> Response:
+    data = ReliefModel.query.all()
+    return make_response(jsonify(json_list=[d.serialize for d in data]), 200)
