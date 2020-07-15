@@ -10,4 +10,5 @@ db.init_app(app)
 
 from bayarea_relief.search import search_bp
 
+
 app.register_blueprint(search_bp)

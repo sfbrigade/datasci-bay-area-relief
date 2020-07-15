@@ -3,7 +3,6 @@ from enum import Enum
 from flask import jsonify, make_response
 from flask import Response, Blueprint, request
 from bayarea_relief.models import ReliefModel
-import json
 
 search_bp = Blueprint('search', __name__, url_prefix='/')
 

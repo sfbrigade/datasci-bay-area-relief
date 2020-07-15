@@ -1,12 +1,8 @@
 import pandas as pd
-from bayarea_relief import models, db
-# from pathlib import Path
+from bayarea_relief import db
 from sqlalchemy import null
-# from sqlalchemy import create_engine, null
 from argparse import ArgumentParser
-import numpy as np
 from datetime import datetime
-import arrow
 
 
 from bayarea_relief.models import ReliefModel
@@ -115,7 +111,7 @@ def populate_datetime(row, column):
         if values[-1] < 2000:
             values[-1] = values[-1] + 2000
         d = Date(*values)
-    except Exception as e:
+    except Exception:
         return row
     else:
         row[column] = datetime(d.year, d.month, d.day)

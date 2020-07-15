@@ -26,34 +26,34 @@ class TestSearchApi(TestCase):
         self.app = app.test_client()
 
     def test_search(self):
-        response = self.app.post("/search", json=self.data, headers=self.headers)
+        response = self.app.post("search/", json=self.data, headers=self.headers)
         self.assertEqual(200, response.status_code)
 
     def test_search_with_invalid_content_type(self):
-        response = self.app.post("/search", json=self.data,
+        response = self.app.post("search/", json=self.data,
                                  headers={
                                      "Content-Type": "text/plain"
                                  })
         self.assertEqual(400, response.status_code)
 
-        response = self.app.post("/search", json=self.data,
+        response = self.app.post("search/", json=self.data,
                                  headers=self.headers)
         self.assertEqual(200, response.status_code)
 
-        response = self.app.post("/search", json=self.data,
+        response = self.app.post("search/", json=self.data,
                                  headers={
                                      "Content-Type": "application/x-www-form-urlencoded"
                                  })
         self.assertEqual(400, response.status_code)
 
-        response = self.app.post("/search", json=self.data,
+        response = self.app.post("search/", json=self.data,
                                  headers={
                                      "Content-Type": "multipart/form-data"
                                  })
         self.assertEqual(400, response.status_code)
 
     def test_search_county(self):
-        response = self.app.post("/search", json=self.data, headers=self.headers)
+        response = self.app.post("search/", json=self.data, headers=self.headers)
         expected = {'alameda_county': 'Yes', 'category': 'Multiple',
                     'contra_costa_county': 'Yes', 'county': 'Unknown',
                     'name': 'Public sector help', 'san_mateo_county': 'Yes',
