@@ -8,7 +8,8 @@
     1. pip3 install -U setuptools
     2. pip3 install virtualenv
     2. python3 -m venv env
-    3. source env/bin/activate
+    3a. source env/bin/activate 
+    3b. .\env\Scripts\activate (Windows Only)
     4. pip3 install --compile .[test]
     ```
     * To stop virtualenv then run this command `deactivate`
