@@ -4,7 +4,6 @@ ENV FLASK_APP bayarea_relief/__main__.py
 ENV FLASK_RUN_HOST 0.0.0.0
 ENV FLASK_RUN_PORT 8000
 COPY bayarea_relief bayarea_relief/
-COPY scripts scripts/
 COPY setup.py .
 RUN pip install --compile .
 VOLUME ["/src/"]
