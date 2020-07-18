@@ -4,7 +4,6 @@ from sqlalchemy import null
 from argparse import ArgumentParser
 from datetime import datetime
 
-
 from bayarea_relief.models import ReliefModel
 from collections import namedtuple
 
@@ -61,40 +60,41 @@ def main():
     df = df.rename(columns=csv_to_db_mapper)
     df.drop(df[df["name"].isna()].index, inplace=True)
     df["_id"] = df.index
-    df["county"] = df["county"].apply(lambda r: r.lower())
-    df["category"] = df["category"].apply(lambda r: r.replace(" ", "_").lower())
-    df["non_profit"] = df["non_profit"].apply(
-        lambda r: r.replace(" ", "_").replace("-", "_").lower())
-    df["relief_type"] = df["relief_type"].apply(lambda r: r.replace(" ", "_").lower())
-    df["award_type"] = df["award_type"].apply(lambda r: r.replace("-", "_").lower())
-    df["max_award_amount"] = df["max_award_amount"].astype(str).apply(
-        lambda r: r.replace("$", "").replace(",", ""))
+    df["county"] = df["county"].apply(transform_entry)
+    df["category"] = df["category"].apply(transform_entry)
+    df["non_profit"] = df["non_profit"].apply(transform_entry)
+    df["relief_type"] = df["relief_type"].apply(transform_entry)
+    df["award_type"] = df["award_type"].apply(transform_entry)
+    df["max_award_amount"] = df["max_award_amount"].astype(str).apply(transform_entry)
     df["interest_rate_applicable"] = df["interest_rate_applicable"].astype(str).apply(
-        lambda r: r.replace(" ", "_").lower())
-    df["support_type"] = df["support_type"].apply(
-        lambda r: r.strip().replace(" ", "_").lower())
-    df["sector_type"] = df["sector_type"].apply(
-        lambda r: r.strip().replace(" ", "_").lower())
-    df["supported_entity"] = df["supported_entity"].apply(
-        lambda r: r.replace(" ", "_").replace("-", "_").lower())
-    df["non_profit"] = df["non_profit"].replace('non_profit_only',
-                                                'non_profits_only')
+        transform_entry)
+    df["support_type"] = df["support_type"].apply(transform_entry)
+    df["sector_type"] = df["sector_type"].apply(transform_entry)
+    df["supported_entity"] = df["supported_entity"].apply(transform_entry)
+    df["non_profit"] = df["non_profit"].replace('non_profit_only', 'non_profits_only')
     df['max_award_amount'] = df['max_award_amount'].replace('nan', null())
     df['deadline'] = df['deadline'].replace('nan', null())
     df = df.replace('nan', null())
     df = df.fillna(null())
-    print(df['max_award_amount'])
+    queries = ReliefModel.query.all()
+    if queries:
+        for q in queries:
+            db.session.delete(q)
+        db.session.commit()
     df.apply(upload, axis=1)
-    # # print(df["date_added"])
-    # df.to_sql('relief', connection, if_exists="replace")
+
+
+def transform_entry(entry):
+    entry = entry.strip()
+    for character in [" ", "-"]:
+        entry = entry.replace(character, '_')
+    for character in ["$", ","]:
+        entry = entry.replace(character, '')
+
+    return entry.lower()
 
 
 def upload(row):
-    # queries = ReliefModel.query.all()
-    # if queries:
-    #     for q in queries:
-    #         db.session.delete(q)
-    #         db.session.commit()
     row = populate_datetime(row, "deadline")
     row = populate_datetime(row, "date_added")
     relief = ReliefModel(**row.to_dict())

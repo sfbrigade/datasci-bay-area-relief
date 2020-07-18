@@ -6,8 +6,10 @@ services:
     ports:
       - 5432:5432
       - 5000:5432
-    env_file:
-      - database.env # configure postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=bar
     volumes:
       - db:/var/lib/postgresql/data/ # persist data even if container shuts down
   webserver:
@@ -15,6 +17,8 @@ services:
     container_name: webserver
     ports:
       - 8000:8000
+    environment:
+      - DATABASE_HOST=postgres
     depends_on:
       - database
 volumes:
