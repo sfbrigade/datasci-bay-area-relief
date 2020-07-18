@@ -14,3 +14,5 @@ upgrade-db:
 	migrate db upgrade
 downgrade-db:
 	migrate db downgrade
+test-terraform:
+	export AWS_PROFILE=codesf && aws s3 ls
