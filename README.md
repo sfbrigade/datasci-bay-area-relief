@@ -13,14 +13,12 @@
     4. pip3 install --compile .[test]
     ```
     * To stop virtualenv then run this command `deactivate`
-3. Run backend webserver `webserver`
-
-#### Running Database
-1. Start postgres db `make database-start`
+3. Run backend application and database `docker-compose up`
+4. Use database with two ways:
     * Login `psql -d <database_name> -U <postgres username>` e.g. ` psql -d bar -U postgres
     * Using the [postgreSQL client](https://eggerapps.at/postico/) is easier and prefer
         * Credentials for your local postgres, should be in database.env
-2. Stop postgres db `make database-stop`
+2. Stop application and database `docker-compose down`
 
 #### Running Migrations on your DB 
 1. Migrate and create tables `make upgrade-db`
@@ -42,11 +40,8 @@
 
 ### Populate database
 * `pip install psycopg2-binary sqlalchemy pandas`
-* `python scripts/ingest_raw_data.py `
+* `python bayarea_relief/ingest_raw_data.py `
 
-
-### Run webserver and database with Docker Compose
-1. `docker-compose up`
 
 ### Initial Continuous Integration
 2. Run unittests `make unittest`

@@ -2,10 +2,10 @@
 unittest:
 	flake8 . --max-line-length=88 --exclude migrations/
 	pytest
-database-start:
+application-start:
 	docker-compose up -d
 #	docker exec -it $$(docker ps -aqf "name=postgres") /bin/bash
-database-stop:
+application-start:
 	docker-compose down
 init-migrate-db:
 	migrate db init

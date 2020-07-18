@@ -5,7 +5,8 @@ ENV FLASK_RUN_HOST 0.0.0.0
 ENV FLASK_RUN_PORT 8000
 COPY bayarea_relief bayarea_relief/
 COPY setup.py .
-RUN pip install --compile .
+COPY tests tests/
+RUN pip install --compile .[test]
 VOLUME ["/src/"]
 EXPOSE 8000
 CMD ["flask", "run"]
