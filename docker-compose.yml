@@ -1,4 +1,4 @@
-version: "3.8"
+version: "3.3"
 services:
   database:
     image: postgres # use latest official postgres version
@@ -18,5 +18,4 @@ services:
     depends_on:
       - database
 volumes:
-  db: # named volumes can be managed easier using docker-compose
-    name: bayarea-relief-volume
+  db:

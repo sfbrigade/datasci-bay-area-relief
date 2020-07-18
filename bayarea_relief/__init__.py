@@ -1,8 +1,10 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
 
 app = Flask(__name__)
-url = "postgresql://postgres:postgres@database:5000/bar"
+CORS(app)
+url = "postgresql://postgres:postgres@postgres:5432/bar"
 app.config['SQLALCHEMY_DATABASE_URI'] = url
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # silence the deprecation warning
 db = SQLAlchemy(app)

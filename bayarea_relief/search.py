@@ -46,4 +46,4 @@ def get_county_coverage(counties_supported):
 @search_bp.route('/', methods=["GET"])
 def home() -> Response:
     data = ReliefModel.query.all()
-    return make_response(jsonify(json_list=[d.serialize for d in data]), 200)
+    return make_response(jsonify(results=[d.serialize for d in data]), 200)

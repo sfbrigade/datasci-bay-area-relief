@@ -40,7 +40,8 @@
 
 ### Populate database
 * `pip install psycopg2-binary sqlalchemy pandas`
-* `python bayarea_relief/ingest_raw_data.py `
+* `python python bayarea_relief/ingest_raw_data.py -c data/raw_data.csv 
+ `
 
 
 ### Initial Continuous Integration

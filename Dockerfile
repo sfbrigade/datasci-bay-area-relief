@@ -7,6 +7,5 @@ COPY bayarea_relief bayarea_relief/
 COPY setup.py .
 COPY tests tests/
 RUN pip install --compile .[test]
-VOLUME ["/src/"]
 EXPOSE 8000
 CMD ["flask", "run"]
