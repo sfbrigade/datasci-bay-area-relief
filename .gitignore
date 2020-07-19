@@ -8,3 +8,4 @@ env/
 *.tfstate
 *.tfstate.backup
 .terraform
+.env

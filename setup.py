@@ -24,7 +24,8 @@ setuptools.setup(
         "psycopg2-binary",
         "pandas",
         "flask-cors",
-        "sqlalchemy"
+        "sqlalchemy",
+        "python-dotenv"
     ],
     # For installing test dependencies directly
     extras_require={'test': tests_require},
