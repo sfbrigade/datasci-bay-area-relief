@@ -25,7 +25,8 @@ setuptools.setup(
         "pandas",
         "flask-cors",
         "sqlalchemy",
-        "python-dotenv"
+        "python-dotenv",
+        "gunicorn"
     ],
     # For installing test dependencies directly
     extras_require={'test': tests_require},
