@@ -54,3 +54,4 @@
 * [How to handle form data with flask ](https://stackoverflow.com/questions/45590988/converting-flask-form-data-to-json-only-gets-first-value)
 * [How to use postgress docker-compose](https://medium.com/analytics-vidhya/getting-started-with-postgresql-using-docker-compose-34d6b808c47c)
 * [Flask SQL Alchemy](https://flask-sqlalchemy.palletsprojects.com/en/2.x/models/)
+* [Learn about WSGI](https://flask.palletsprojects.com/en/1.1.x/deploying/wsgi-standalone/)
