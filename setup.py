@@ -26,7 +26,10 @@ setuptools.setup(
         "flask-cors",
         "sqlalchemy",
         "python-dotenv",
-        "gunicorn"
+        "gunicorn",
+        "google-api-python-client",
+        "google-auth-httplib2",
+        "google-auth-oauthlib"
     ],
     # For installing test dependencies directly
     extras_require={'test': tests_require},
