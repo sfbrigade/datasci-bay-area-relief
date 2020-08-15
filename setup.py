@@ -1,14 +1,9 @@
 import setuptools
 
 # Used for installing test dependencies directly
-tests_require = [
-    'mock',
-    'nose',
-    'nose-timer',
-    'flake8',
-    'coverage',
-    'pytest'
-]
+tests_require = ['mock', 'nose', 'nose-timer', 'flake8', 'coverage', 'pytest']
+
+lambda_require = ['moto']
 
 setuptools.setup(
     name="bayarea_relief",
@@ -32,7 +27,10 @@ setuptools.setup(
         "google-auth-oauthlib"
     ],
     # For installing test dependencies directly
-    extras_require={'test': tests_require},
+    extras_require={
+        'test': tests_require,
+        'lambda': lambda_require
+    },
     python_requires='>=3.7',
     entry_points={
         'console_scripts': [

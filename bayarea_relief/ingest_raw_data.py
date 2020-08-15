@@ -90,7 +90,6 @@ def transform_entry(entry):
         entry = entry.replace(character, '_')
     for character in ["$", ","]:
         entry = entry.replace(character, '')
-
     return entry.lower()
 
 
