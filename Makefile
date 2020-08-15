@@ -6,7 +6,7 @@ unittest:
 application-start:
 	docker-compose up -d
 #	docker exec -it $$(docker ps -aqf "name=postgres") /bin/bash
-application-start:
+application-stop:
 	docker-compose down
 init-migrate-db:
 	migrate db init

@@ -15,6 +15,19 @@ class BinaryWithUnknown(Enum):
     def __str__(self):
         return self.value
 
+class BinaryWithUnknownNA(Enum):
+    Yes = 'Yes'
+    No = 'No'
+    Unknown = 'Unknown'
+    NotApplicable = 'Not Applicable'
+
+    @classmethod
+    def is_available(cls, response):
+        return BinaryWithUnknownNA.yes.value == response
+
+    def __str__(self):
+        return self.value
+
 
 class Binary(Enum):
     Yes = 'Yes'
@@ -59,6 +72,7 @@ class NonProfitEnum(Enum):
     unknown = 'Unknown'
     non_profits_only = "Non-Profits Only"
     businesses_only = "Businesses Only"
+    individuals_only = "Individuals Only"
 
     def __str__(self):
         return self.value
@@ -144,10 +158,10 @@ class ReliefModel(db.Model):
     lgbtq = db.Column(db.Enum(Binary))
     women_owned = db.Column(db.Enum(Binary))
     non_profit = db.Column(db.Enum(NonProfitEnum))
-    _100_or_fewer = db.Column(db.Enum(BinaryWithUnknown))
-    _500_or_fewer = db.Column(db.Enum(BinaryWithUnknown))
-    _750_or_fewer = db.Column(db.Enum(BinaryWithUnknown))
-    _750_more = db.Column(db.Enum(BinaryWithUnknown))
+    _100_or_fewer = db.Column(db.Enum(BinaryWithUnknownNA))
+    _500_or_fewer = db.Column(db.Enum(BinaryWithUnknownNA))
+    _750_or_fewer = db.Column(db.Enum(BinaryWithUnknownNA))
+    _750_more = db.Column(db.Enum(BinaryWithUnknownNA))
     relief_type = db.Column(db.Enum(ReliefTypeEnum))
     award_type = db.Column(db.Enum(AwardTypeEnum))
     award_amount_specified = db.Column(db.Enum(Binary))

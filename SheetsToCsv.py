@@ -10,8 +10,8 @@ from google.auth.transport.requests import Request
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 
 # The ID and range of a sample spreadsheet.
-SPREADSHEET_ID = '' #/spreadsheets/d/SPREADSHEET_ID/edit#git=SHEETID
-RANGE_NAME = 'A:C'
+SPREADSHEET_ID = '1d1s80Xbp3dfRglPspHypf5InMB71agZJqPTN3vhmFUo' #/spreadsheets/d/SPREADSHEET_ID/edit#git=SHEETID
+RANGE_NAME = 'Raw Data!A:AL'
 
 
 def main():
@@ -46,7 +46,7 @@ def main():
     values = result.get('values', [])
 
     with open('ResultFile.csv', 'w', newline='') as myfile:
-        wr = csv.writer(myfile, quoting=csv.QUOTE_ALL)
+        wr = csv.writer(myfile)
         for value in values:
             wr.writerow(value)
 
