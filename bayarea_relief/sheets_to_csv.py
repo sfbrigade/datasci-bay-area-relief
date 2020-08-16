@@ -10,7 +10,7 @@ from google.auth.transport.requests import Request
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 
 # The ID and range of a sample spreadsheet.
-SPREADSHEET_ID = '1d1s80Xbp3dfRglPspHypf5InMB71agZJqPTN3vhmFUo' #/spreadsheets/d/SPREADSHEET_ID/edit#git=SHEETID
+SPREADSHEET_ID = '1d1s80Xbp3dfRglPspHypf5InMB71agZJqPTN3vhmFUo'  #/spreadsheets/d/SPREADSHEET_ID/edit#git=SHEETID
 RANGE_NAME = 'Raw Data!A:AL'
 
 
@@ -30,8 +30,7 @@ def main():
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
         else:
-            flow = InstalledAppFlow.from_client_secrets_file(
-                'credentials.json', SCOPES)
+            flow = InstalledAppFlow.from_client_secrets_file('credentials.json', SCOPES)
             creds = flow.run_local_server(port=0)
         # Save the credentials for the next run
         with open('token.pickle', 'wb') as token:
@@ -45,7 +44,7 @@ def main():
                                 range=RANGE_NAME).execute()
     values = result.get('values', [])
 
-    with open('ResultFile.csv', 'w', newline='') as myfile:
+    with open('data/ResultFile.csv', 'w', newline='') as myfile:
         wr = csv.writer(myfile)
         for value in values:
             wr.writerow(value)

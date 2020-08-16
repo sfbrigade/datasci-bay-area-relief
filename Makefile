@@ -12,7 +12,6 @@ init-migrate-db:
 	migrate db init
 	migrate db migrate
 upgrade-db:
-	migrate db migrate
 	migrate db upgrade
 downgrade-db:
 	migrate db downgrade

@@ -9,3 +9,6 @@ env/
 *.tfstate.backup
 .terraform
 .env
+credentials.json
+token.pickle
+.vscode/

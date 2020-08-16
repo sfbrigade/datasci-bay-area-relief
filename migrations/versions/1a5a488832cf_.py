@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: abce9605d0cc
+Revision ID: 1a5a488832cf
 Revises: 
-Create Date: 2020-08-12 19:41:13.949141
+Create Date: 2020-08-15 18:01:19.474639
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'abce9605d0cc'
+revision = '1a5a488832cf'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -31,12 +31,12 @@ def upgrade():
     sa.Column('black_owned', sa.Enum('Yes', 'No', name='binary'), nullable=True),
     sa.Column('lgbtq', sa.Enum('Yes', 'No', name='binary'), nullable=True),
     sa.Column('women_owned', sa.Enum('Yes', 'No', name='binary'), nullable=True),
-    sa.Column('non_profit', sa.Enum('all', 'unknown', 'non_profits_only', 'businesses_only', name='nonprofitenum'), nullable=True),
-    sa.Column('_100_or_fewer', sa.Enum('Yes', 'No', 'Unknown', name='binarywithunknown'), nullable=True),
-    sa.Column('_500_or_fewer', sa.Enum('Yes', 'No', 'Unknown', name='binarywithunknown'), nullable=True),
-    sa.Column('_750_or_fewer', sa.Enum('Yes', 'No', 'Unknown', name='binarywithunknown'), nullable=True),
-    sa.Column('_750_more', sa.Enum('Yes', 'No', 'Unknown', name='binarywithunknown'), nullable=True),
-    sa.Column('relief_type', sa.Enum('covid', 'protest_damage', 'both', name='relieftypeenum'), nullable=True),
+    sa.Column('non_profit', sa.Enum('all', 'unknown', 'non_profits_only', 'businesses_only', 'individuals_only', name='nonprofitenum'), nullable=True),
+    sa.Column('_100_or_fewer', sa.Enum('Yes', 'No', 'Unknown', 'NotApplicable', name='binarywithunknownna'), nullable=True),
+    sa.Column('_500_or_fewer', sa.Enum('Yes', 'No', 'Unknown', 'NotApplicable', name='binarywithunknownna'), nullable=True),
+    sa.Column('_750_or_fewer', sa.Enum('Yes', 'No', 'Unknown', 'NotApplicable', name='binarywithunknownna'), nullable=True),
+    sa.Column('_750_more', sa.Enum('Yes', 'No', 'Unknown', 'NotApplicable', name='binarywithunknownna'), nullable=True),
+    sa.Column('relief_type', sa.Enum('covid', 'protest_damage', 'both', 'other', name='relieftypeenum'), nullable=True),
     sa.Column('award_type', sa.Enum('recurring', 'one_time', name='awardtypeenum'), nullable=True),
     sa.Column('award_amount_specified', sa.Enum('Yes', 'No', name='binary'), nullable=True),
     sa.Column('max_award_amount', sa.Integer(), nullable=True),

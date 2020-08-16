@@ -15,6 +15,7 @@ class BinaryWithUnknown(Enum):
     def __str__(self):
         return self.value
 
+
 class BinaryWithUnknownNA(Enum):
     Yes = 'Yes'
     No = 'No'
@@ -82,6 +83,7 @@ class ReliefTypeEnum(Enum):
     covid = 'COVID'
     protest_damage = 'Protest Damage'
     both = "Both"
+    other = "Other"
 
     def __str__(self):
         return self.value
@@ -132,16 +134,6 @@ class SupportedEntity(Enum):
         return self.value
 
 
-# class Serializer(object):
-#
-#     def serialize(self):
-#         return {c: getattr(self, c) for c in inspect(self).attrs.keys()}
-#
-#     @staticmethod
-#     def serialize_list(l):
-#         return [m.serialize() for m in l]
-
-
 class ReliefModel(db.Model):
     __tablename__ = 'relief'
     id = db.Column(db.Integer, primary_key=True)
@@ -184,17 +176,13 @@ class ReliefModel(db.Model):
     spanish = db.Column(db.Enum(BinaryWithUnknown))
 
     def __init__(self, _id, name, sf_county, alameda_county, san_mateo_county,
-                 contra_costa_county, santa_clara_county,
-                 county, category, black_owned,
+                 contra_costa_county, santa_clara_county, county, category, black_owned,
                  lgbtq, women_owned, non_profit, _100_or_fewer, _500_or_fewer,
-                 _750_or_fewer, _750_more, relief_type,
-                 award_type, award_amount_specified,
-                 max_award_amount, interest_rate_applicable, interest_rate,
-                 support_type, sector_type, supported_entity, entity_name,
-                 deadline_applicable, deadline,
-                 website_url, description,
-                 date_added, english,
-                 chinese, spanish, *args, **kwargs):
+                 _750_or_fewer, _750_more, relief_type, award_type,
+                 award_amount_specified, max_award_amount, interest_rate_applicable,
+                 interest_rate, support_type, sector_type, supported_entity,
+                 entity_name, deadline_applicable, deadline, website_url, description,
+                 date_added, english, chinese, spanish, *args, **kwargs):
         self.id = _id
         self.name = name
         self.sf_county = sf_county

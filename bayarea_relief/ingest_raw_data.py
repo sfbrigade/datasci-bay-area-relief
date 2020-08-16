@@ -49,7 +49,10 @@ csv_to_db_mapper = {
 
 def main():
     parser = ArgumentParser(description='Tool for uploading data to PostgreSQL')
-    parser.add_argument('-c', '--csv', type=str, help='CSV path to data for ingestion',
+    parser.add_argument('-c',
+                        '--csv',
+                        type=str,
+                        help='CSV path to data for ingestion',
                         required=True)
     args = parser.parse_args()
     csv_file = args.csv
@@ -74,6 +77,8 @@ def main():
     df["non_profit"] = df["non_profit"].replace('non_profit_only', 'non_profits_only')
     df['max_award_amount'] = df['max_award_amount'].replace('nan', null())
     df['deadline'] = df['deadline'].replace('nan', null())
+    df = df.replace('Not Applicable', 'NotApplicable')
+
     df = df.replace('nan', null())
     df = df.fillna(null())
     queries = ReliefModel.query.all()
