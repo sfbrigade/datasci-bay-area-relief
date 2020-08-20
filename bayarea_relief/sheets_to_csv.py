@@ -44,7 +44,7 @@ def main():
                                 range=RANGE_NAME).execute()
     values = result.get('values', [])
 
-    with open('data/ResultFile.csv', 'w', newline='') as myfile:
+    with open(os.path.dirname(os.getcwd())+'/data/ResultFile.csv', 'w', newline='') as myfile:
         wr = csv.writer(myfile)
         for value in values:
             wr.writerow(value)

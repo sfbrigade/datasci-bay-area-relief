@@ -9,6 +9,6 @@ env/
 *.tfstate.backup
 .terraform
 .env
-credentials.json
-token.pickle
+bayarea_relief/credentials.json
+bayarea_relief/token.pickle
 .vscode/
