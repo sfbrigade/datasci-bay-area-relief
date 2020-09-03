@@ -10,3 +10,5 @@ env/
 .terraform
 .env
 .vscode/
+bayarea_relief/credentials.json
+bayarea_relief/token.pickle

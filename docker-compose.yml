@@ -10,8 +10,8 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=bar
-    volumes:
-      - db:/var/lib/postgresql/data/ # persist data even if container shuts down
+#    volumes:
+#      - db:/var/lib/postgresql/data/ # persist data even if container shuts down
   webserver:
     build: .
     container_name: webserver
@@ -21,5 +21,6 @@ services:
       - DATABASE_HOST=postgres
     depends_on:
       - database
+    command: sh -c "migrate db init && migrate db migrate && migrate db upgrade"
 volumes:
   db:
